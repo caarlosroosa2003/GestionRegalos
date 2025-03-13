@@ -1,36 +1,63 @@
-// src/components/GiftForm.jsx
-import React, { useState, useContext } from 'react';
+// src/components/GiftEdit.jsx
+import React, { useState, useContext, useEffect } from 'react';
 import { GiftContext } from '../context/GiftContext';
-import { useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
-const GiftForm = () => {
-  const { addGift } = useContext(GiftContext);
+const GiftEdit = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { gifts, updateGift } = useContext(GiftContext);
+  const giftToEdit = gifts.find((gift) => gift.id === parseInt(id));
+
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [urgency, setUrgency] = useState('');
   const [price, setPrice] = useState('');
   const [giftDate, setGiftDate] = useState('');
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    if (giftToEdit) {
+      setName(giftToEdit.name);
+      setDescription(giftToEdit.description);
+      setUrgency(giftToEdit.urgency);
+      setPrice(giftToEdit.price);
+      setGiftDate(giftToEdit.giftDate);
+    }
+  }, [giftToEdit]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Validación: ningún campo debe estar vacío
     if (
       name.trim() === '' ||
       description.trim() === '' ||
       urgency.trim() === '' ||
-      price.trim() === '' ||
+      price.toString().trim() === '' ||
       giftDate.trim() === ''
     ) return;
     
-    addGift({ name, description, urgency, price, giftDate });
-    navigate('/lista');
+    const updatedGift = {
+      id: giftToEdit.id,
+      name,
+      description,
+      urgency,
+      price,
+      giftDate
+    };
+    updateGift(updatedGift);
+    navigate(`/detalle/${giftToEdit.id}`);
   };
+
+  if (!giftToEdit) {
+    return (
+      <div className="container">
+        <p>Regalo no encontrado.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="container">
-      <h1>Agregar Nuevo Regalo</h1>
+      <h1>Modificar Regalo</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Nombre:</label>
@@ -76,10 +103,10 @@ const GiftForm = () => {
             onChange={(e) => setGiftDate(e.target.value)}
           />
         </div>
-        <button type="submit">Agregar</button>
+        <button type="submit">Guardar Cambios</button>
       </form>
     </div>
   );
 };
 
-export default GiftForm;
+export default GiftEdit;
