@@ -1,7 +1,6 @@
-// src/components/GiftList.jsx
 import React, { useContext, useState } from 'react';
 import { GiftContext } from '../context/GiftContext';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 const GiftList = () => {
   const { gifts, deleteGift } = useContext(GiftContext);

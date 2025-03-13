@@ -1,7 +1,6 @@
-// src/components/GiftForm.jsx
 import React, { useState, useContext } from 'react';
 import { GiftContext } from '../context/GiftContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 const GiftForm = () => {
   const { addGift } = useContext(GiftContext);

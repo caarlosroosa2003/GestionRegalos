@@ -1,6 +1,5 @@
-// src/App.js
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router';
 import { GiftProvider } from './context/GiftContext';
 import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/Navbar';

@@ -1,6 +1,5 @@
-// src/components/Navbar.jsx
 import React, { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router';
 import { GiftContext } from '../context/GiftContext';
 import { AuthContext } from '../context/AuthContext';
 

@@ -1,7 +1,6 @@
-// src/components/GiftEdit.jsx
 import React, { useState, useContext, useEffect } from 'react';
 import { GiftContext } from '../context/GiftContext';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router';
 
 const GiftEdit = () => {
   const { id } = useParams();
